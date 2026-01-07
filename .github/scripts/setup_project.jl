@@ -4,7 +4,6 @@ new_name = ARGS[1]
 new_uuid = string(uuid4())
 old_name = "MyModule"
 
-# 置換対象のファイルリスト
 files_to_fix = [
     "Project.toml",
     "src/$old_name.jl",
