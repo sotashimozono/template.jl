@@ -11,17 +11,14 @@ files_to_fix = [
     "test/runtests.jl",
     "README.md",
     "docs/make.jl",
-    "docs/src/index.md"
+    "docs/src/index.md",
 ]
 
 for file in files_to_fix
     if isfile(file)
         content = read(file, String)
-        # モジュール名の置換
         content = replace(content, old_name => new_name)
-        # Project.toml の場合は UUID も置換
         if file == "Project.toml"
-            # 元のuuid行を探して新しいものに変える
             content = replace(content, r"uuid = \".*\"" => "uuid = \"$new_uuid\"")
             content = replace(content, r"name = \".*\"" => "name = \"$new_name\"")
         end
@@ -29,7 +26,6 @@ for file in files_to_fix
     end
 end
 
-# ファイル自体のリネーム (src/MyModule.jl -> src/NEWREPO.jl)
 if isfile("src/$old_name.jl")
     mv("src/$old_name.jl", "src/$new_name.jl")
 end
