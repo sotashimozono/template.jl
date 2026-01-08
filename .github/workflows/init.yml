@@ -7,7 +7,6 @@ jobs:
     runs-on: ubuntu-latest
     permissions:
       contents: write
-      administration: write
       
     steps:
       - uses: actions/checkout@v6
@@ -16,6 +15,7 @@ jobs:
           version: '1.12'
       
       - name: Configure Repository Settings
+        GH_TOKEN:  ${{ secrets.GITHUB_TOKEN }}
         run: |
           gh repo edit ${{ github.repository }} \
             --enable-discussions \
@@ -25,7 +25,7 @@ jobs:
         run: |
           NEW_REPO="${{ github.repository }}"
           OLD_URL="https://github.com/sotashimozono/template.jl/discussions"
-          NEW_URL="https://github.com//${NEW_REPO}/discussions"
+          NEW_URL="https://github.com/${NEW_REPO}/discussions"
           sed -i "s|${OLD_URL}|${NEW_URL}|g" .github/ISSUE_TEMPLATE/config.yml
 
       - name: Rename Module and Generate UUID
