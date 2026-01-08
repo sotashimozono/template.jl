@@ -16,7 +16,7 @@ jobs:
       
       - name: Configure Repository Settings
         env:
-          GH_TOKEN:  ${{ secrets.PAT_ADMIN }}
+          GH_TOKEN: ${{ secrets.PAT_ADMIN }}
         run: |
           gh repo edit ${{ github.repository }} \
             --enable-discussions \
@@ -38,7 +38,7 @@ jobs:
       # ⭐ ルールセット適用を追加
       - name: Apply Branch Protection Ruleset
         env:
-          GH_TOKEN:  ${{ secrets.PAT_ADMIN }}
+          GH_TOKEN: ${{ secrets.PAT_ADMIN }}
         run: |
           gh api \
             --method POST \
@@ -48,7 +48,7 @@ jobs:
             --input .github/rulesets/main-protection.json || echo "Ruleset may already exist"
         continue-on-error: true  # 既に存在する場合もエラーにしない
       
-      - name:  Commit and Push changes
+      - name: Commit and Push changes
         run: |
           git config --local user.email "action@github.com"
           git config --local user.name "GitHub Action"
