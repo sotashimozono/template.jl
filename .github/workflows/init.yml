@@ -2,7 +2,7 @@ name: Initial Project Setup
 on: [push]
 
 jobs:
-  setup:
+  setup: 
     if: github.run_number == 1 && github.repository != 'sotashimozono/template.jl'
     runs-on: ubuntu-latest
     permissions:
@@ -15,12 +15,14 @@ jobs:
           version: '1.12'
       
       - name: Configure Repository Settings
-        GH_TOKEN:  ${{ secrets.GITHUB_TOKEN }}
+        env:
+          GH_TOKEN:  ${{ secrets.GITHUB_TOKEN }}
         run: |
           gh repo edit ${{ github.repository }} \
             --enable-discussions \
             --enable-auto-merge \
             --delete-branch-on-merge
+      
       - name: Update Discussion URL in config.yml
         run: |
           NEW_REPO="${{ github.repository }}"
@@ -32,7 +34,21 @@ jobs:
         run: |
           REPO_NAME=$(echo "${{ github.event.repository.name }}" | sed 's/\.jl$//')
           julia .github/scripts/setup_project.jl "$REPO_NAME"
-      - name: Commit and Push changes
+      
+      # ⭐ ルールセット適用を追加
+      - name: Apply Branch Protection Ruleset
+        env:
+          GH_TOKEN:  ${{ secrets.PAT_ADMIN }}
+        run: |
+          gh api \
+            --method POST \
+            -H "Accept: application/vnd.github+json" \
+            -H "X-GitHub-Api-Version: 2022-11-28" \
+            /repos/${{ github.repository }}/rulesets \
+            --input .github/rulesets/main-protection.json || echo "Ruleset may already exist"
+        continue-on-error: true  # 既に存在する場合もエラーにしない
+      
+      - name:  Commit and Push changes
         run: |
           git config --local user.email "action@github.com"
           git config --local user.name "GitHub Action"
