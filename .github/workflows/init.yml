@@ -16,7 +16,7 @@ jobs:
       
       - name: Configure Repository Settings
         env:
-          GH_TOKEN:  ${{ secrets.GITHUB_TOKEN }}
+          GH_TOKEN:  ${{ secrets.PAT_ADMIN }}
         run: |
           gh repo edit ${{ github.repository }} \
             --enable-discussions \
