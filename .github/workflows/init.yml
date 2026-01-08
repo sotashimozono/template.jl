@@ -28,7 +28,7 @@ jobs:
           NEW_REPO="${{ github.repository }}"
           OLD_URL="https://github.com/sotashimozono/template.jl/discussions"
           NEW_URL="https://github.com/${NEW_REPO}/discussions"
-          sed -i "s|${OLD_URL}|${NEW_URL}|g" . github/ISSUE_TEMPLATE/config.yml
+          sed -i "s|${OLD_URL}|${NEW_URL}|g" .github/ISSUE_TEMPLATE/config.yml
 
       - name: Rename Module and Generate UUID
         run: |
@@ -50,9 +50,9 @@ jobs:
       
       - name:  Commit and Push changes
         run: |
-          git config --local user.email "action@github. com"
+          git config --local user.email "action@github.com"
           git config --local user.name "GitHub Action"
           git rm .github/workflows/init.yml
-          git add . 
+          git add .
           git commit -m "Initialize project: Set module name to $REPO_NAME and generate new UUID"
           git push
