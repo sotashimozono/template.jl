@@ -22,6 +22,7 @@ jobs:
             --enable-discussions \
             --enable-auto-merge \
             --delete-branch-on-merge
+        continue-on-error: true
       
       - name: Update Discussion URL in config.yml
         run: |
