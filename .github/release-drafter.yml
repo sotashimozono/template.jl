@@ -9,7 +9,7 @@ categories:
     labels:
       - 'bug'
       - 'fix'
-  - title: '⚡ Performance'  # 追加
+  - title: '⚡ Performance'
     labels:
       - 'performance'
   - title: '📖 Documentation'
