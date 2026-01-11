@@ -30,7 +30,10 @@ jobs:
         run: |
           git config --local user.email "action@github.com"
           git config --local user.name "GitHub Action"
+
           git rm .github/workflows/init.yml
+          git rm --ignore-unmatch .github/workflows/docker-publish.yml
+
           git add .
           git commit -m "Initialize project: Set module name to $REPO_NAME and generate new UUID"
           git push
