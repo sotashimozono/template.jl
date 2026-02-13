@@ -5,7 +5,7 @@
 [![Code Style: Blue](https://img.shields.io/badge/Code%20Style-Blue-4495d1.svg)](https://github.com/invenia/BlueStyle)
 
 <a id="badge-top"></a>
-[![codecov](https://codecov.io/gh/sotashimozono/Lattices.jl/graph/badge.svg?token=6E7VZ9MJMK)](https://app.codecov.io/gh/sotashimozono)
+[![codecov](https://codecov.io/gh/sotashimozono/template.jl/graph/badge.svg?token=Q3oEEiz9A2)](https://codecov.io/gh/sotashimozono/template.jl)
 [![Build Status](https://github.com/sotashimozono/MyModule.jl/actions/workflows/CI.yml/badge.svg?branch=main)](https://github.com/sotashimozono/MyModule.jl/actions/workflows/CI.yml?query=branch%3Amain)
 [![License](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
