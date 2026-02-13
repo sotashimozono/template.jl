@@ -1,6 +1,6 @@
 # MyModule.jl
 
-[![docs: dev](https://img.shields.io/badge/docs-dev-blue.svg)](https://codes.sota-shimozono.com/MyModule.jl/dev/)
+[![docs: stable](https://img.shields.io/badge/docs-dev-blue.svg)](https://codes.sota-shimozono.com/MyModule.jl/stable/)
 [![Julia](https://img.shields.io/badge/julia-v1.12+-9558b2.svg)](https://julialang.org)
 [![Code Style: Blue](https://img.shields.io/badge/Code%20Style-Blue-4495d1.svg)](https://github.com/invenia/BlueStyle)
 
