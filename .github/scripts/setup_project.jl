@@ -6,6 +6,7 @@ old_name = "MyModule"
 
 files_to_fix = [
     "Project.toml",
+    "docs/Project.toml",
     "src/$old_name.jl",
     "test/runtests.jl",
     "README.md",
