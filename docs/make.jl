@@ -8,27 +8,24 @@ favicon_path = joinpath(assets_dir, "favicon.ico")
 
 Downloads.download("https://github.com/sotashimozono.png", favicon_path)
 
-makedocs(
-    sitename = "MyModule.jl",
-    format = Documenter.HTML(
-        canonical = "https://codes.sota-shimozono.com/MyModule.jl/stable/",
-        prettyurls = get(ENV, "CI", "false") == "true",
-        mathengine = MathJax3(Dict(
-            :tex => Dict(
-                :inlineMath => [["\$", "\$"], ["\\(", "\\)"]],
-                :tags => "ams",
-                :packages => ["base", "ams", "autoload", "physics"]
+makedocs(;
+    sitename="MyModule.jl",
+    format=Documenter.HTML(;
+        canonical="https://codes.sota-shimozono.com/MyModule.jl/stable/",
+        prettyurls=get(ENV, "CI", "false") == "true",
+        mathengine=MathJax3(
+            Dict(
+                :tex => Dict(
+                    :inlineMath => [["\$", "\$"], ["\\(", "\\)"]],
+                    :tags => "ams",
+                    :packages => ["base", "ams", "autoload", "physics"],
+                ),
             ),
-        )),
-        assets = ["assets/favicon.ico"],
+        ),
+        assets=["assets/favicon.ico"],
     ),
-    modules  = [MyModule],
-    pages    = [
-        "Home" => "index.md"
-    ]
+    modules=[MyModule],
+    pages=["Home" => "index.md"],
 )
 
-deploydocs(
-    repo = "github.com/sotashimozono/MyModule.jl.git",
-    devbranch = "main",
-)
+deploydocs(; repo="github.com/sotashimozono/MyModule.jl.git", devbranch="main")
