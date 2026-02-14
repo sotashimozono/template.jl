@@ -18,7 +18,7 @@ for file in files_to_fix
     if isfile(file)
         content = read(file, String)
         content = replace(content, old_name => new_name)
-        if file == "Project.toml"
+        if file in ["Project.toml", "docs/Project.toml"]
             content = replace(content, r"uuid = \".*\"" => "uuid = \"$new_uuid\"")
             content = replace(content, r"name = \".*\"" => "name = \"$new_name\"")
         end
