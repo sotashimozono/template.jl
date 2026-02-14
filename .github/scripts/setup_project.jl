@@ -18,9 +18,12 @@ for file in files_to_fix
     if isfile(file)
         content = read(file, String)
         content = replace(content, old_name => new_name)
-        if file in ["Project.toml", "docs/Project.toml"]
-            content = replace(content, r"uuid = \".*\"" => "uuid = \"$new_uuid\"")
-            content = replace(content, r"name = \".*\"" => "name = \"$new_name\"")
+        if file == "Project.toml"
+            content = replace(content, r"^name = \".*\""m => "name = \"$new_name\"")
+            content = replace(content, r"^uuid = \".*\""m => "uuid = \"$new_uuid\"")
+        elseif file == "docs/Project.toml"
+            content = replace(content, Regex("$(new_name) = \".*\"") => "$(new_name) = \"$new_uuid\"")
+            content = replace(content, r"^uuid = \".*\""m => "uuid = \"$(string(uuid4()))\"")
         end
         write(file, content)
     end
