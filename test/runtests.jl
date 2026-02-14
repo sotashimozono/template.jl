@@ -3,7 +3,7 @@ ENV["GKSwstype"] = "100"
 using MyModule, Test
 const dirs = []
 
-const FIG_BASE = joinpath(pkgdir(MyModule), "docs", "src", "assets", "figures")
+const FIG_BASE = joinpath(pkgdir(MyModule), "docs", "src", "assets")
 const PATHS = Dict()
 mkpath.(values(PATHS))
 
@@ -18,12 +18,15 @@ mkpath.(values(PATHS))
         )
         if isempty(files)
             println("  No test files found in $(dirpath).")
+            @test false
         else
             for f in files
-                filepath = joinpath(dirpath, f)
-                @time begin
-                    println("  Including $(filepath)")
-                    include(filepath)
+                @testset "f" begin
+                    filepath = joinpath(dirpath, f)
+                    @time begin
+                        println("  Including $(filepath)")
+                        include(filepath)
+                    end
                 end
             end
         end
