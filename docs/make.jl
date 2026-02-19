@@ -5,8 +5,10 @@ using Downloads
 assets_dir = joinpath(@__DIR__, "src", "assets")
 mkpath(assets_dir)
 favicon_path = joinpath(assets_dir, "favicon.ico")
+logo_path = joinpath(assets_dir, "logo.png")
 
 Downloads.download("https://github.com/sotashimozono.png", favicon_path)
+Downloads.download("https://github.com/sotashimozono.png", logo_path)
 
 makedocs(;
     sitename="MyModule.jl",
@@ -22,7 +24,7 @@ makedocs(;
                 ),
             ),
         ),
-        assets=["assets/favicon.ico"],
+        assets=["assets/favicon.ico", "assets/custom.css"],
     ),
     modules=[MyModule],
     pages=["Home" => "index.md"],
