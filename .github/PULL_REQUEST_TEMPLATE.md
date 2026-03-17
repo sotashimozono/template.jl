@@ -1,23 +1,29 @@
-## 概要
-(もしあれば)
-- 関連するIssue: #
+## Description
 
-## 変更の種類
-- [ ] ✨ 新機能 (Feature)
-- [ ] 🐛 バグ修正 (Bug Fix)
-- [ ] ⚡ パフォーマンス改善 (Performance)
-- [ ] 📖 ドキュメント整備 (Documentation)
-- [ ] 🔧 その他 (Refactoring, CI/CD, etc...)
+Fixed: #  (if any)
+Description: 
 
-## 変更内容
-- 
-- 
+## Type of Change
 
-## 使用例
+- [ ] ✨ **Feature** (`feature` or `enhancement` label)
+- [ ] 🐛 **Bug Fix** (`bug` or `fix` label)
+- [ ] ⚡ **Performance** (`performance` label)
+- [ ] 📖 **Documentation** (`documentation` label)
+- [ ] 🧰 **Maintenance** (`chore` or `refactor` label)
+
+## Proposed Changes
+
+what did you change?
+
+- write here
+
+## Usage or Results
+
 ```julia
-# 実装した機能の使用例
+# Example or verification script
 
 ```
+
 ## check list
 - [ ] test駆動をしたか
 - [ ] Project.tomlのバージョンを上げたか
