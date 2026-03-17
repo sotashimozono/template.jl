@@ -11,20 +11,20 @@ body:
   - type: textarea
     id: description
     attributes:
-      label: バグの内容
-      description: どのような問題が発生していますか？
-      placeholder: バグの内容を詳しく説明してください
+      label: Bug Description
+      description: What kind of issue are you experiencing?
+      placeholder: Please describe the bug in detail.
     validations:
       required: true
 
   - type: textarea
     id: reproduction
     attributes:
-      label: 発生時のコード
-      description: バグを再現するためのコード例を提供してください
+      label: Codes to Reproduce
+      description: Provide a code snippet that reproduces the issue.
       placeholder: |
         ```julia
-        # ここにコードを貼り付けてください
+        # paste your code
         ```
       render: julia
     validations:
@@ -33,35 +33,26 @@ body:
   - type: textarea
     id: expected
     attributes:
-      label: 期待される動作
-      description: 本来どのように動作すべきですか？
+      label: expected behavior
+      description: What did you expect to happen?
     validations:
-      required: false
-
-  - type: textarea
-    id: actual
-    attributes:
-      label: 実際の動作
-      description: 実際にはどのような動作をしていますか？
-    validations: 
       required: false
 
   - type: textarea
     id: environment
     attributes:
-      label: 環境情報
-      description: Julia のバージョンなど
+      label: Environment Information
+      description: Version of Julia etc...
       placeholder: |
         - Julia version: 
-        - LSystems. jl version: 
-        - OS: 
+        - OS:
     validations:
       required: false
 
   - type: textarea
     id: additional
-    attributes: 
-      label: 追加情報
-      description: その他、参考になる情報があれば記載してください
-    validations: 
+    attributes:
+      label: Additional Information
+      description: If there is any other information that may be helpful, please provide it here.
+    validations:
       required: false
