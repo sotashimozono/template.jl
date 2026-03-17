@@ -1,15 +1,14 @@
 ## Description
 
 Fixed: #  (if any)
-Description: 
 
 ## Type of Change
 
-- [ ] ✨ **Feature** (`feature` or `enhancement` label)
-- [ ] 🐛 **Bug Fix** (`bug` or `fix` label)
-- [ ] ⚡ **Performance** (`performance` label)
-- [ ] 📖 **Documentation** (`documentation` label)
-- [ ] 🧰 **Maintenance** (`chore` or `refactor` label)
+- [ ] ✨ **Feature** (`enhancement`)
+- [ ] 🐛 **Bug Fix** (`bug`)
+- [ ] ⚡ **Performance** (`performance`)
+- [ ] 📖 **Documentation** (`documentation`)
+- [ ] 🧰 **Maintenance** (`chore` or `refactor`)
 
 ## Proposed Changes
 
