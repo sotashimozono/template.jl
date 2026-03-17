@@ -1,51 +1,53 @@
 name: 💭 Wish List
-description: 将来実装したい機能のアイデア
+description: Ideas for future features and improvements
 title: "[Wish]: "
 labels: ["wishlist", "future"]
 body:
   - type: markdown
     attributes:
       value: |
-        将来的に実装したい機能のアイデアを記録します。
+        Record ideas for features or improvements to be implemented in the future.
 
   - type: textarea
     id: idea
     attributes:
-      label: アイデア
-      description: どのような機能を実装したいですか？
-      placeholder: アイデアを自由に記述してください
+      label: Feature Idea
+      description: What feature or functionality would you like to implement?
+      placeholder: Describe your idea in detail...
     validations:
       required: true
 
   - type: dropdown
     id: priority
     attributes:
-      label: 優先度
-      description: この機能の優先度はどのくらいですか？
+      label: Priority
+      description: How would you prioritize this feature?
       options:
-        - 高 - すぐに実装したい
-        - 中 - いずれ実装したい
-        - 低 - アイデアとして記録
+        - "High - Immediate priority / Urgent"
+        - "Medium - Planned for future development"
+        - "Low - Long-term idea / Just a note"
     validations:
       required: false
 
   - type: textarea
     id: context
     attributes:
-      label: 背景・コンテキスト
-      description: なぜこの機能があると良いですか？
+      label: Context & Rationale
+      description: Why is this feature needed? (e.g., scientific motivation, workflow efficiency)
     validations:
       required: false
 
   - type: textarea
     id: sketch
     attributes:
-      label: スケッチ・構想
-      description: 実装のイメージやアプローチがあれば記載してください
+      label: Sketch & Conceptual Design
+      description: Describe implementation ideas or technical approaches.
       placeholder: |
         ```julia
-        # 実装のイメージ
-        # conceptual な実装だけでも可
+        # Conceptual implementation or pseudo-code
+        function solve_new_method(params...)
+            # ...
+        end
         ```
       render: julia
     validations: 
@@ -54,7 +56,7 @@ body:
   - type: textarea
     id: references
     attributes:
-      label:  参考資料
-      description: 関連する論文、リンク、他のライブラリなど
+      label: References
+      description: Related papers, links, other libraries, or prior discussions.
     validations:
       required: false
