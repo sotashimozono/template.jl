@@ -1,9 +1,24 @@
 name: Publish Release
 
+# Publishes a GitHub Release whenever a vX.Y.Z tag is pushed.
+#
+# The release notes are built by `.github/scripts/build_release_notes.py`,
+# which inspects every PR merged since the previous tag, extracts the
+# `## Proposed Changes` and `## Usage or Results` sections from each PR
+# body, groups them by label, and writes a rich markdown report.
+#
+# If a draft release for this tag already exists (e.g. left by Release
+# Drafter) it is overwritten with the rich notes and published.
+
 on:
   push:
     tags:
       - 'v*'
+  workflow_dispatch:
+    inputs:
+      tag:
+        description: "tag to publish (e.g. v0.3.0)"
+        required: true
 
 permissions:
   contents: write
@@ -14,36 +29,44 @@ jobs:
     steps:
       - uses: actions/checkout@v6
         with:
+          # Need full history so the script can find the previous tag
+          # via `git tag --sort=-creatordate` and `git log <tag>`.
           fetch-depth: 0
 
-      - name: Build release body
-        id: body
+      - name: Resolve tag
+        id: tag
+        run: |
+          if [ -n "${{ inputs.tag }}" ]; then
+            echo "tag=${{ inputs.tag }}" >> "$GITHUB_OUTPUT"
+          else
+            echo "tag=${{ github.ref_name }}" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Build release notes
+        id: notes
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          TAG="${{ github.ref_name }}"
-          BODY=$(gh release view "$TAG" --json body --jq '.body' 2>/dev/null || echo "")
-
-          if [ -z "$BODY" ] || [ "$BODY" = "null" ]; then
-            BODY=$(gh release list --limit 50 --json tagName,isDraft \
-              --jq '.[] | select(.isDraft == true) | .tagName' | head -n 1 | xargs -I{} gh release view {} --json body --jq '.body' 2>/dev/null || echo "")
-          fi
-
-          if [ -z "$BODY" ] || [ "$BODY" = "null" ]; then
-            BODY="## Changelog\n\n- See changelog/commit history for details in $TAG."
-          fi
-
-          printf 'content<<EOF\n%s\nEOF\n' "$BODY" >> "$GITHUB_OUTPUT"
+          mkdir -p /tmp/release
+          python3 .github/scripts/build_release_notes.py \
+            --tag "${{ steps.tag.outputs.tag }}" \
+            > /tmp/release/notes.md
+          echo "--- generated notes ---"
+          cat /tmp/release/notes.md
+          echo "-----------------------"
 
       - name: Create or update release
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          TAG="${{ github.ref_name }}"
-          BODY="${{ steps.body.outputs.content }}"
-
+          TAG="${{ steps.tag.outputs.tag }}"
           if gh release view "$TAG" >/dev/null 2>&1; then
-            gh release edit "$TAG" --title "$TAG" --notes "$BODY" --draft=false
+            gh release edit "$TAG" \
+              --title "$TAG" \
+              --notes-file /tmp/release/notes.md \
+              --draft=false
           else
-            gh release create "$TAG" --title "$TAG" --notes "$BODY"
+            gh release create "$TAG" \
+              --title "$TAG" \
+              --notes-file /tmp/release/notes.md
           fi
