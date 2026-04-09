@@ -3,13 +3,17 @@ name: VersionCheck
 # Ensures that every PR targeting main bumps Project.toml version.
 # The check fails if the version in the PR branch is not strictly greater
 # than the version on the base branch.
+#
+# IMPORTANT: this workflow runs on *every* PR, not only PRs that touch
+# Project.toml. Restricting the trigger with `paths: Project.toml`
+# would let version-bump-forgotten PRs slip through silently because
+# the workflow would never run, and required-check gating treats the
+# absent run as a "skipped, OK" instead of a failure.
 
 on:
   pull_request:
     branches:
       - main
-    paths:
-      - Project.toml
 
 permissions:
   contents: read
