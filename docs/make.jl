@@ -30,4 +30,9 @@ makedocs(;
     pages=["Home" => "index.md"],
 )
 
-deploydocs(; repo="github.com/sotashimozono/MyModule.jl.git", devbranch="main")
+deploydocs(;
+    versions=["stable", "dev"],
+    repo="github.com/sotashimozono/MyModule.jl.git",
+    devbranch="main",
+    push_preview=true,
+)
