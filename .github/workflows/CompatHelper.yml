@@ -1,12 +1,18 @@
 name: CompatHelper
 on:
   schedule:
-    - cron: '0 0 * * *' # 毎日0時にチェック
+    # 4 時間ごとにチェック (旧: 毎日 0 時) — bot PR の遅延を 1/6 に短縮
+    - cron: '0 */4 * * *'
   workflow_dispatch:
 
 permissions:
   contents: write
   pull-requests: write
+
+# 同一 ref に対する重複起動を抑止 (manual + cron が重なるケース)
+concurrency:
+  group: compathelper
+  cancel-in-progress: false
 
 jobs:
   CompatHelper:
