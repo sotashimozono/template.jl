@@ -14,10 +14,10 @@ name: Verify references
 #                                          so infra flakiness never blocks a PR)
 #   a BROKEN id/key in references.allow -> downgraded to an acknowledged exception
 #
-# The offline companion check ("every bibkey cited in the source has an entry in
-# references.bib", cited ⊆ bib) is a small project-specific test you add once
-# your citation convention is fixed; point it at the same REFERENCES_BIB path so
-# the two never disagree on which file is canonical.
+# Stage 1 (the offline companion — "every citation in a src/ docstring resolves to a
+# references.bib entry", cited ⊆ bib) is test/references.jl, run from runtests.jl on
+# every PR. It reads the same REFERENCES_BIB path, so the two never disagree on which
+# file is canonical.
 
 on:
   pull_request:
