@@ -13,6 +13,9 @@ mkpath.(values(PATHS))
     @testset "Aqua tests" begin
         Aqua.test_all(MyModule)
     end
+    # ----- Stage-1 citation check: every src/ docstring citation resolves to a
+    #       docs/references.bib entry (pairs with the doiget Stage 2, in CI). -----
+    include("references.jl")
     # ----- Test files in the "test" directory. -----
     test_args = copy(ARGS)
     println("Passed arguments ARGS = $(test_args) to tests.")
